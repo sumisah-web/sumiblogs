@@ -31,6 +31,7 @@
                 <a href="#download" class="nav-link" data-en="Download" data-ne="डाउनलोड">
                     <i class="fas fa-download"></i> Download
                 </a>
+                <!-- Auth link will be dynamically added here -->
             </div>
             <div class="nav-controls">
                 <button class="lang-toggle" id="lang-toggle">
@@ -57,6 +58,9 @@
                 </p>
                 <button class="cta-button" onclick="scrollToSection('about')" data-en="Start Exploring" data-ne="अन्वेषण सुरु गर्नुहोस्">
                     Start Exploring
+                </button>
+                <button class="explore-btn" onclick="showExplorePlaces()">
+                    <i class="fas fa-compass"></i> Explore Places
                 </button>
             </div>
             <div class="hero-image">
@@ -172,8 +176,8 @@
                 <p class="section-subtitle" data-en="Explore our collection of Sanskrit heritage" data-ne="हाम्रो संस्कृत सम्पदा संग्रह अन्वेषण गर्नुहोस्">Explore our collection of Sanskrit heritage</p>
             </div>
             
-            <!-- Upload Form -->
-            <div class="upload-section">
+            <!-- Upload Form - Only shown to logged-in users -->
+            <div class="upload-section" id="upload-section" style="display: none;">
                 <div class="upload-card">
                     <h3 data-en="Upload Photo" data-ne="फोटो अपलोड गर्नुहोस्">Upload Photo</h3>
                     <form id="upload-form">
@@ -195,6 +199,20 @@
                         </div>
                         <button type="submit" class="upload-btn" data-en="Upload Photo" data-ne="फोटो अपलोड गर्नुहोस्">Upload Photo</button>
                     </form>
+                </div>
+            </div>
+
+            <!-- Login prompt for non-authenticated users -->
+            <div class="login-prompt" id="login-prompt" style="display: none;">
+                <div class="prompt-card">
+                    <i class="fas fa-lock"></i>
+                    <h3 data-en="Login Required" data-ne="लगइन आवश्यक छ">Login Required</h3>
+                    <p data-en="Please login to upload photos and contribute to our gallery." data-ne="कृपया हाम्रो ग्यालरीमा योगदान गर्न फोटो अपलोड गर्न लगइन गर्नुहोस्।">
+                        Please login to upload photos and contribute to our gallery.
+                    </p>
+                    <button class="login-prompt-btn" onclick="window.location.href='login.html'">
+                        <i class="fas fa-sign-in-alt"></i> <span data-en="Login" data-ne="लगइन">Login
+                    </button>
                 </div>
             </div>
 
@@ -371,6 +389,18 @@
         </div>
     </div>
 
+    <!-- Explore Places Modal -->
+    <div id="explore-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Explore Places</h2>
+            <div id="explore-map"></div>
+            <div class="explore-photos" id="explore-photos"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
