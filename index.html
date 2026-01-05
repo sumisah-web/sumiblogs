@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorer Our Sanskrit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" data-en="Explorer Our Sanskrit" data-ne="हाम्रो संस्कृत अन्वेषण गर्नुहोस्">
+                Explorer Our Sanskrit
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" data-en="Home" data-ne="गृह">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#about" class="nav-link" data-en="About" data-ne="हाम्रो बारेमा">
+                    <i class="fas fa-info-circle"></i> About
+                </a>
+                <a href="#news" class="nav-link" data-en="News" data-ne="समाचार">
+                    <i class="fas fa-newspaper"></i> News
+                </a>
+                <a href="#gallery" class="nav-link" data-en="Gallery" data-ne="ग्यालरी">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+                <a href="#download" class="nav-link" data-en="Download" data-ne="डाउनलोड">
+                    <i class="fas fa-download"></i> Download
+                </a>
+            </div>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="lang-toggle">
+                    <i class="fas fa-globe"></i> <span id="lang-text">नेपाली</span>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title" data-en="Discover Ancient Wisdom" data-ne="प्राचीन ज्ञान खोज्नुहोस्">
+                    Discover Ancient Wisdom
+                </h1>
+                <p class="hero-subtitle" data-en="Explore the rich heritage and profound knowledge of Sanskrit literature" data-ne="संस्कृत साहित्यको समृद्ध सम्पदा र गहिरो ज्ञान अन्वेषण गर्नुहोस्">
+                    Explore the rich heritage and profound knowledge of Sanskrit literature
+                </p>
+                <button class="cta-button" onclick="scrollToSection('about')" data-en="Start Exploring" data-ne="अन्वेषण सुरु गर्नुहोस्">
+                    Start Exploring
+                </button>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <i class="fas fa-book-open"></i>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="About Sanskrit" data-ne="संस्कृतको बारेमा">
+                    About Sanskrit
+                </h2>
+                <p class="section-subtitle" data-en="Understanding the language of the gods" data-ne="देवताहरूको भाषा बुझ्ने">
+                    Understanding the language of the gods
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <h3 data-en="Ancient Texts" data-ne="प्राचीन ग्रन्थहरू">Ancient Texts</h3>
+                    <p data-en="Sanskrit literature encompasses a vast collection of philosophical, religious, and scientific texts that have shaped human thought for millennia." data-ne="संस्कृत साहित्यले हजारौं वर्षदेखि मानव विचारलाई आकार दिएका दार्शनिक, धार्मिक र वैज्ञानिक ग्रन्थहरूको विशाल संग्रहलाई समेट्छ।">
+                        Sanskrit literature encompasses a vast collection of philosophical, religious, and scientific texts that have shaped human thought for millennia.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 data-en="Scientific Knowledge" data-ne="वैज्ञानिक ज्ञान">Scientific Knowledge</h3>
+                    <p data-en="Ancient Sanskrit texts contain remarkable insights into mathematics, astronomy, medicine, and other sciences that continue to influence modern research." data-ne="प्राचीन संस्कृत ग्रन्थहरूमा गणित, खगोलशास्त्र, चिकित्सा र अन्य विज्ञानहरूमा उल्लेखनीय अन्तर्दृष्टिहरू छन् जसले आधुनिक अनुसन्धानलाई प्रभावित गर्न जारी छन्।">
+                        Ancient Sanskrit texts contain remarkable insights into mathematics, astronomy, medicine, and other sciences that continue to influence modern research.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-meditation"></i>
+                    </div>
+                    <h3 data-en="Spiritual Wisdom" data-ne="आध्यात्मिक ज्ञान">Spiritual Wisdom</h3>
+                    <p data-en="The profound spiritual teachings in Sanskrit scriptures offer timeless guidance for personal growth and understanding of consciousness." data-ne="संस्कृत शास्त्रहरूमा गहिरो आध्यात्मिक शिक्षाहरूले व्यक्तिगत विकास र चेतनाको बुझाइका लागि कालातीत मार्गदर्शन प्रस्तुत गर्छन्।">
+                        The profound spiritual teachings in Sanskrit scriptures offer timeless guidance for personal growth and understanding of consciousness.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Latest News" data-ne="ताजा समाचार">Latest News</h2>
+                <p class="section-subtitle" data-en="Updates from the Sanskrit world" data-ne="संस्कृत संसारबाट अपडेटहरू">Updates from the Sanskrit world</p>
+            </div>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="news-content">
+                        <h3 data-en="New Sanskrit University Opens" data-ne="नयाँ संस्कृत विश्वविद्यालय खुल्यो">New Sanskrit University Opens</h3>
+                        <p class="news-date" data-en="January 2024" data-ne="जनवरी 2024">January 2024</p>
+                        <p data-en="A new center for advanced Sanskrit studies has been established, offering comprehensive courses in classical literature and philosophy." data-ne="शास्त्रीय साहित्य र दर्शनमा समग्र पाठ्यक्रमहरू प्रस्ताव गर्दै संस्कृत अध्ययनको लागि नयाँ केन्द्र स्थापना गरिएको छ।">
+                            A new center for advanced Sanskrit studies has been established, offering comprehensive courses in classical literature and philosophy.
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More" data-ne="थप पढ्नुहोस्">Read More</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="news-content">
+                        <h3 data-en="Ancient Manuscripts Digitized" data-ne="प्राचीन पाण्डुलिपिहरू डिजिटलाइज गरियो">Ancient Manuscripts Digitized</h3>
+                        <p class="news-date" data-en="December 2023" data-ne="डिसेम्बर 2023">December 2023</p>
+                        <p data-en="Thousands of rare Sanskrit manuscripts have been digitized and made available online for researchers and enthusiasts worldwide." data-ne="दुर्लभ संस्कृत पाण्डुलिपिहरूको हजारौं संख्या डिजिटलाइज गरिएको छ र अनुसन्धानकर्ताहरू र विश्वभरका उत्साहीहरूका लागि अनलाइन उपलब्ध गराइएको छ।">
+                            Thousands of rare Sanskrit manuscripts have been digitized and made available online for researchers and enthusiasts worldwide.
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More" data-ne="थप पढ्नुहोस्">Read More</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <div class="news-content">
+                        <h3 data-en="Scientific Texts Translation Project" data-ne="वैज्ञानिक ग्रन्थहरू अनुवाद परियोजना">Scientific Texts Translation Project</h3>
+                        <p class="news-date" data-en="November 2023" data-ne="नोभेम्बर 2023">November 2023</p>
+                        <p data-en="An ambitious project to translate ancient Sanskrit scientific texts into multiple languages has been launched by international scholars." data-ne="प्राचीन संस्कृत वैज्ञानिक ग्रन्थहरूलाई बहुभाषामा अनुवाद गर्ने एक महत्वाकांक्षी परियोजना अन्तर्राष्ट्रिय विद्वानहरूद्वारा सुरु गरिएको छ।">
+                            An ambitious project to translate ancient Sanskrit scientific texts into multiple languages has been launched by international scholars.
+                        </p>
+                        <a href="#" class="read-more" data-en="Read More" data-ne="थप पढ्नुहोस्">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Gallery" data-ne="ग्यालरी">Gallery</h2>
+                <p class="section-subtitle" data-en="Explore our collection of Sanskrit heritage" data-ne="हाम्रो संस्कृत सम्पदा संग्रह अन्वेषण गर्नुहोस्">Explore our collection of Sanskrit heritage</p>
+            </div>
+            
+            <!-- Upload Form -->
+            <div class="upload-section">
+                <div class="upload-card">
+                    <h3 data-en="Upload Photo" data-ne="फोटो अपलोड गर्नुहोस्">Upload Photo</h3>
+                    <form id="upload-form">
+                        <div class="form-group">
+                            <input type="file" id="photo-upload" accept="image/*" required>
+                            <label for="photo-upload" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span data-en="Choose Photo" data-ne="फोटो चयन गर्नुहोस्">Choose Photo</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="photo-title" placeholder="Photo Title" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="photo-location" placeholder="Location" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="photo-description" placeholder="Description and History" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="upload-btn" data-en="Upload Photo" data-ne="फोटो अपलोड गर्नुहोस्">Upload Photo</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Sample Gallery Items -->
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="gallery/sample1.jpg" alt="Ancient Temple" onerror="this.src='https://via.placeholder.com/400x300/4a90e2/ffffff?text=Ancient+Temple'">
+                        <div class="gallery-overlay">
+                            <button class="view-btn" onclick="openModal(this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Ancient Sanskrit Temple</h4>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Varanasi, India</p>
+                        <p class="description">A 2000-year-old temple where ancient Sanskrit texts were studied and preserved.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="gallery/sample2.jpg" alt="Palm Leaf Manuscript" onerror="this.src='https://via.placeholder.com/400x300/e74c3c/ffffff?text=Palm+Leaf+Manuscript'">
+                        <div class="gallery-overlay">
+                            <button class="view-btn" onclick="openModal(this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Palm Leaf Manuscript</h4>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                        <p class="description">Ancient Sanskrit texts written on palm leaves, dating back to 5th century CE.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-image">
+                        <img src="gallery/sample3.jpg" alt="Sanskrit Inscription" onerror="this.src='https://via.placeholder.com/400x300/2ecc71/ffffff?text=Sanskrit+Inscription'">
+                        <div class="gallery-overlay">
+                            <button class="view-btn" onclick="openModal(this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h4>Ashoka Inscription</h4>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Sarnath, India</p>
+                        <p class="description">3rd century BCE inscription in Sanskrit by Emperor Ashoka.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Downloads" data-ne="डाउनलोडहरू">Downloads</h2>
+                <p class="section-subtitle" data-en="Access our collection of Sanskrit resources" data-ne="हाम्रो संस्कृत स्रोतहरूको संग्रहमा पहुँच प्राप्त गर्नुहोस्">Access our collection of Sanskrit resources</p>
+            </div>
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 data-en="Sanskrit Grammar Guide" data-ne="संस्कृत व्याकरण मार्गदर्शिका">Sanskrit Grammar Guide</h3>
+                    <p data-en="Comprehensive guide to Sanskrit grammar and syntax" data-ne="संस्कृत व्याकरण र वाक्यरचनाको समग्र मार्गदर्शिका">Comprehensive guide to Sanskrit grammar and syntax</p>
+                    <div class="download-info">
+                        <span class="file-size">2.5 MB</span>
+                        <span class="file-type">PDF</span>
+                    </div>
+                    <a href="download/sanskrit-grammar.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> <span data-en="Download" data-ne="डाउनलोड गर्नुहोस्">Download</span>
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 data-en="Vedic Literature Collection" data-ne="वैदिक साहित्य संग्रह">Vedic Literature Collection</h3>
+                    <p data-en="Essential Vedic texts with translations and commentary" data-ne="अनुवाद र टिप्पणीसहित आवश्यक वैदिक ग्रन्थहरू">Essential Vedic texts with translations and commentary</p>
+                    <div class="download-info">
+                        <span class="file-size">5.8 MB</span>
+                        <span class="file-type">PDF</span>
+                    </div>
+                    <a href="download/vedic-literature.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> <span data-en="Download" data-ne="डाउनलोड गर्नुहोस्">Download</span>
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 data-en="Sanskrit-English Dictionary" data-ne="संस्कृत-अंग्रेजी शब्दकोश">Sanskrit-English Dictionary</h3>
+                    <p data-en="Essential dictionary for Sanskrit learners and scholars" data-ne="संस्कृत विद्यार्थी र विद्वानहरूका लागि आवश्यक शब्दकोश">Essential dictionary for Sanskrit learners and scholars</p>
+                    <div class="download-info">
+                        <span class="file-size">1.2 MB</span>
+                        <span class="file-type">PDF</span>
+                    </div>
+                    <a href="download/sanskrit-dictionary.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> <span data-en="Download" data-ne="डाउनलोड गर्नुहोस्">Download</span>
+                    </a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-meditation"></i>
+                    </div>
+                    <h3 data-en="Yoga Sutras of Patanjali" data-ne="पतञ्जलिको योग सूत्रहरू">Yoga Sutras of Patanjali</h3>
+                    <p data-en="The foundational text of yoga philosophy with detailed explanation" data-ne="योग दर्शनको आधारभूत ग्रन्थ विस्तृत व्याख्यासहित">The foundational text of yoga philosophy with detailed explanation</p>
+                    <div class="download-info">
+                        <span class="file-size">3.1 MB</span>
+                        <span class="file-type">PDF</span>
+                    </div>
+                    <a href="download/yoga-sutras.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> <span data-en="Download" data-ne="डाउनलोड गर्नुहोस्">Download</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-en="Explorer Our Sanskrit" data-ne="हाम्रो संस्कृत अन्वेषण गर्नुहोस्">Explorer Our Sanskrit</h3>
+                    <p data-en="Preserving and sharing the wisdom of ancient Sanskrit literature for future generations." data-ne="भावी पुस्ताका लागि प्राचीन संस्कृत साहित्यको ज्ञान संरक्षण र साझा गर्ने।">
+                        Preserving and sharing the wisdom of ancient Sanskrit literature for future generations.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Quick Links" data-ne="छिटो लिङ्कहरू">Quick Links</h4>
+                    <ul>
+                        <li><a href="#home" data-en="Home" data-ne="गृह">Home</a></li>
+                        <li><a href="#about" data-en="About" data-ne="हाम्रो बारेमा">About</a></li>
+                        <li><a href="#news" data-en="News" data-ne="समाचार">News</a></li>
+                        <li><a href="#gallery" data-en="Gallery" data-ne="ग्यालरी">Gallery</a></li>
+                        <li><a href="#download" data-en="Download" data-ne="डाउनलोड">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 data-en="Contact" data-ne="सम्पर्क">Contact</h4>
+                    <p><i class="fas fa-envelope"></i> info@exploreroursanskrit.org</p>
+                    <p><i class="fas fa-phone"></i> +1-234-567-8900</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Explorer Our Sanskrit. <span data-en="All rights reserved." data-ne="सबै अधिकार सुरक्षित।">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Gallery -->
+    <div id="gallery-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-location"></p>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
