@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Explorer Our Sanskrit</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo">
+                <h2>Explorer Our Sanskrit - Admin</h2>
+            </div>
+            <div class="admin-header-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count" id="notification-count">0</span>
+                </button>
+                <div class="admin-user">
+                    <span id="admin-username">Admin</span>
+                    <button class="logout-btn" onclick="adminLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="members">
+                    <i class="fas fa-users"></i>
+                    <span>Members</span>
+                    <span class="badge" id="pending-members-count">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="photos">
+                    <i class="fas fa-images"></i>
+                    <span>Photo Verification</span>
+                    <span class="badge" id="pending-photos-count">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="section-header">
+                    <h2>Admin Dashboard</h2>
+                    <p>Overview of system statistics</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-members">0</h3>
+                            <p>Total Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="pending-members">0</h3>
+                            <p>Pending Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="active-members">0</h3>
+                            <p>Active Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-photos">0</h3>
+                            <p>Photos Uploaded</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="recent-activity">
+                        <!-- Activity items will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Members Section -->
+            <section id="members-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Member Management</h2>
+                    <div class="section-actions">
+                        <select id="member-filter">
+                            <option value="all">All Members</option>
+                            <option value="pending">Pending</option>
+                            <option value="active">Active</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="exportMembers()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Joined Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="members-table-body">
+                            <!-- Members will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Photos Section -->
+            <section id="photos-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Photo Verification</h2>
+                    <p>Review and approve uploaded photos</p>
+                </div>
+
+                <div class="photos-grid" id="photos-verification-grid">
+                    <!-- Photos pending verification will be displayed here -->
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Admin Settings</h2>
+                    <p>Manage admin account and system settings</p>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-card">
+                        <h3>Change Admin Credentials</h3>
+                        <form id="admin-credentials-form">
+                            <div class="form-group">
+                                <label>Current Username</label>
+                                <input type="text" id="current-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="current-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Username</label>
+                                <input type="text" id="new-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="new-password" required minlength="8">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Credentials</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>System Statistics</h3>
+                        <div class="system-stats">
+                            <div class="stat-item">
+                                <span>Total Storage Used:</span>
+                                <span id="storage-used">0 MB</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Database Size:</span>
+                                <span id="db-size">0 KB</span>
+                            </div>
+                            <div class="stat-item">
+                                <span>Last Backup:</span>
+                                <span id="last-backup">Never</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="backupData()">
+                            <i class="fas fa-download"></i> Backup Data
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Photo Modal -->
+    <div id="photo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="photo-modal-content">
+                <img id="modal-photo" src="" alt="">
+                <div class="photo-info">
+                    <h3 id="photo-title"></h3>
+                    <p id="photo-location"></p>
+                    <p id="photo-description"></p>
+                    <p id="photo-uploader"></p>
+                    <p id="photo-date"></p>
+                    <div class="photo-actions">
+                        <button class="btn btn-success" onclick="approvePhoto()">
+                            <i class="fas fa-check"></i> Approve
+                        </button>
+                        <button class="btn btn-danger" onclick="rejectPhoto()">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
