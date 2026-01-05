@@ -90,278 +90,101 @@ function loadLanguagePreference() {
         toggleLanguage();
     }
 }
-// Map and Gallery Functions
-let map;
-let markers = [];
-let currentMapView = 'overview';
 
-// Initialize map functionality
-function initializeMap() {
-    // Create a simple interactive map using Leaflet or similar library
-    // For now, we'll create a placeholder that can be replaced with actual map implementation
-    
-    const mapContainer = document.getElementById('gallery-map');
-    const expandedMapContainer = document.getElementById('expanded-map');
-    
-    // Placeholder map implementation
-    createInteractiveMap(mapContainer, false);
-    createInteractiveMap(expandedMapContainer, true);
+// Gallery Upload Functions
+function initializeGalleryUpload() {
+    uploadForm.addEventListener('submit', handlePhotoUpload);
 }
 
-function createInteractiveMap(container, isExpanded = false) {
-    // This is a placeholder implementation
-    // In production, you would integrate with Google Maps, Leaflet, or Mapbox
+function handlePhotoUpload(e) {
+    e.preventDefault();
     
-    container.innerHTML = `
-        <div class="map-placeholder">
-            <i class="fas fa-map-marked-alt"></i>
-            <p>${currentLang === 'en' ? 'Interactive Map View' : 'इंटरएक्टिभ नक्सा दृश्य'}</p>
-            <small>${currentLang === 'en' ? 'Click on map buttons to view locations' : 'स्थानहरू हेर्न नक्सा बटनहरूमा क्लिक गर्नुहोस्'}</small>
+    const fileInput = document.getElementById('photo-upload');
+    const title = document.getElementById('photo-title').value;
+    const location = document.getElementById('photo-location').value;
+    const description = document.getElementById('photo-description').value;
+    
+    if (fileInput.files.length === 0) {
+        alert(currentLang === 'en' ? 'Please select a photo to upload.' : 'कृपया अपलोड गर्न फोटो चयन गर्नुहोस्।');
+        return;
+    }
+    
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const galleryItem = createGalleryItem(e.target.result, title, location, description);
+        galleryGrid.insertBefore(galleryItem, galleryGrid.firstChild);
+        
+        // Reset form
+        uploadForm.reset();
+        
+        // Show success message
+        showNotification(currentLang === 'en' ? 'Photo uploaded successfully!' : 'फोटो सफलतापूर्वक अपलोड गरियो!');
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+function createGalleryItem(imageSrc, title, location, description) {
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item fade-in';
+    
+    galleryItem.innerHTML = `
+        <div class="gallery-image">
+            <img src="${imageSrc}" alt="${title}">
+            <div class="gallery-overlay">
+                <button class="view-btn" onclick="openModal(this)">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+        </div>
+        <div class="gallery-info">
+            <h4>${title}</h4>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> ${location}</p>
+            <p class="description">${description}</p>
         </div>
     `;
     
-    // Add click event listeners to gallery items for map interaction
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        const lat = parseFloat(item.dataset.lat);
-        const lng = parseFloat(item.dataset.lng);
-        const location = item.dataset.location;
-        
-        if (lat && lng) {
-            // Store marker data
-            markers.push({
-                lat: lat,
-                lng: lng,
-                location: location,
-                element: item
-            });
+    // Trigger fade-in animation
+    setTimeout(() => {
+        galleryItem.classList.add('visible');
+    }, 100);
+    
+    return galleryItem;
+}
+
+// Modal Functions
+function initializeModal() {
+    closeModal.addEventListener('click', closeGalleryModal);
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeGalleryModal();
         }
     });
-    
-    // If using a real map library, you would initialize it here
-    // Example with Leaflet:
-    /*
-    if (typeof L !== 'undefined') {
-        const mapInstance = L.map(container).setView([25.3176, 82.9739], 5);
-        
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(mapInstance);
-        
-        // Add markers
-        markers.forEach(marker => {
-            L.marker([marker.lat, marker.lng])
-                .addTo(mapInstance)
-                .bindPopup(marker.location)
-                .on('click', () => {
-                    focusOnLocation(marker.lat, marker.lng);
-                });
-        });
-        
-        if (isExpanded) {
-            mapInstance.invalidateSize();
-        }
-        
-        return mapInstance;
-    }
-    */
 }
 
-// Focus on specific location
-function focusOnLocation(lat, lng) {
-    console.log(`Focusing on location: ${lat}, ${lng}`);
+function openModal(button) {
+    const galleryItem = button.closest('.gallery-item');
+    const img = galleryItem.querySelector('img');
+    const title = galleryItem.querySelector('h4').textContent;
+    const location = galleryItem.querySelector('.location').textContent;
+    const description = galleryItem.querySelector('.description').textContent;
     
-    // Highlight the corresponding gallery item
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        item.classList.remove('highlighted');
-        if (parseFloat(item.dataset.lat) === lat && parseFloat(item.dataset.lng) === lng) {
-            item.classList.add('highlighted');
-            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    });
-    
-    // In a real implementation, you would center the map on these coordinates
-    // and show a popup with location information
-    
-    // Show expanded map modal
-    openMapModal(lat, lng);
-}
-
-// Reset map view
-function resetMapView() {
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        item.classList.remove('highlighted');
-    });
-    
-    // Reset map to show all markers
-    if (map) {
-        // map.fitBounds(L.latLngBounds(markers.map(m => [m.lat, m.lng])));
-    }
-}
-
-// Toggle map view
-function toggleMapView() {
-    const mapContainer = document.querySelector('.map-container');
-    mapContainer.classList.toggle('expanded');
-    
-    if (mapContainer.classList.contains('expanded')) {
-        // Recenter map if needed
-        setTimeout(() => {
-            if (map) {
-                // map.invalidateSize();
-            }
-        }, 300);
-    }
-}
-
-// Open expanded map modal
-function openMapModal(lat, lng) {
-    const modal = document.getElementById('map-modal');
-    const expandedMap = document.getElementById('expanded-map');
-    
-    // Find the corresponding gallery item
-    const galleryItem = document.querySelector(`[data-lat="${lat}"][data-lng="${lng}"]`);
-    if (galleryItem) {
-        const title = galleryItem.querySelector('h4').textContent;
-        const location = galleryItem.querySelector('.location').textContent;
-        const description = galleryItem.querySelector('.description').textContent;
-        
-        document.getElementById('map-modal-title').textContent = title;
-        document.getElementById('map-modal-location').textContent = location;
-        document.getElementById('map-modal-description').textContent = description;
-    }
+    modalImage.src = img.src;
+    modalImage.alt = title;
+    modalTitle.textContent = title;
+    modalLocation.textContent = location;
+    modalDescription.textContent = description;
     
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
-    
-    // Initialize expanded map
-    setTimeout(() => {
-        createInteractiveMap(expandedMap, true);
-    }, 100);
 }
 
-// Close map modal
-function closeMapModal() {
-    const modal = document.getElementById('map-modal');
+function closeGalleryModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
-
-// Extract GPS coordinates from image metadata (EXIF data)
-async function extractGPSFromImage(imageElement) {
-    // This function would use a library like exif-js to extract GPS data
-    // For now, we'll use the data attributes that would be populated from server-side
-    
-    return new Promise((resolve) => {
-        // In a real implementation, you would:
-        /*
-        EXIF.getData(imageElement, function() {
-            const gpsLat = EXIF.getTag(this, "GPSLatitude");
-            const gpsLng = EXIF.getTag(this, "GPSLongitude");
-            const latRef = EXIF.getTag(this, "GPSLatitudeRef");
-            const lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-            
-            if (gpsLat && gpsLng) {
-                const lat = convertDMSToDD(gpsLat, latRef);
-                const lng = convertDMSToDD(gpsLng, lngRef);
-                resolve({ lat, lng });
-            } else {
-                resolve(null);
-            }
-        });
-        */
-        
-        // For demo purposes, use data attributes
-        const galleryItem = imageElement.closest('.gallery-item');
-        const lat = parseFloat(galleryItem.dataset.lat);
-        const lng = parseFloat(galleryItem.dataset.lng);
-        
-        resolve(lat && lng ? { lat, lng } : null);
-    });
-}
-
-// Convert DMS to Decimal Degrees
-function convertDMSToDD(dms, ref) {
-    let dd = dms[0] + dms[1]/60 + dms[2]/3600;
-    if (ref === "S" || ref === "W") {
-        dd = dd * -1;
-    }
-    return dd;
-}
-
-// Initialize gallery enhancements
-function initializeGalleryEnhancements() {
-    // Add GPS coordinate extraction for all gallery images
-    document.querySelectorAll('.gallery-item img').forEach(async (img) => {
-        const coords = await extractGPSFromImage(img);
-        if (coords) {
-            // Update the displayed coordinates
-            const coordElement = img.closest('.gallery-item').querySelector('.coordinates');
-            if (coordElement) {
-                coordElement.innerHTML = `<i class="fas fa-globe"></i> ${coords.lat.toFixed(4)}°N, ${coords.lng.toFixed(4)}°E`;
-            }
-        }
-    });
-    
-    // Initialize the map
-    initializeMap();
-}
-
-// Add CSS for highlighted gallery items
-const additionalStyles = document.createElement('style');
-additionalStyles.textContent = `
-    .gallery-item.highlighted {
-        transform: scale(1.02);
-        box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
-        border: 3px solid var(--primary-color);
-    }
-    
-    .gallery-item.highlighted .gallery-image {
-        filter: brightness(1.1);
-    }
-    
-    .map-container.expanded {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 800px;
-        height: 500px;
-        z-index: 2000;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    
-    .map-container.expanded .gallery-map {
-        height: 100%;
-    }
-`;
-document.head.appendChild(additionalStyles);
-
-// Remove upload functionality
-function removeUploadFunctionality() {
-    // Hide upload section
-    const uploadSection = document.querySelector('.upload-section');
-    if (uploadSection) {
-        uploadSection.style.display = 'none';
-    }
-    
-    // Remove any upload-related event listeners
-    const uploadForm = document.getElementById('upload-form');
-    if (uploadForm) {
-        uploadForm.removeEventListener('submit', handlePhotoUpload);
-    }
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // ... existing initialization code ...
-    
-    // Initialize gallery enhancements
-    initializeGalleryEnhancements();
-    
-    // Remove upload functionality
-    removeUploadFunctionality();
-});
 
 // Scroll Animations
 function initializeScrollAnimations() {
